@@ -1,0 +1,101 @@
+﻿@model mvcToDoList.Models.Todos
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm("Edit", "Todos", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "edit_task", role = "form" }))
+{ 
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal input-edited">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Category, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Estimate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Estimate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Estimate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DueDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input asp-for="DueDate" class="form-control text-box single-line valid" data-val="true" data-val-date="The field DueDate must be a date." id="DueDate" name="DueDate" type="date" value="@Model.DueDate.ToString("yyyy-MM-dd")">
+                @Html.ValidationMessageFor(model => model.DueDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Importance, "Importance", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Importance, new SelectList(
+                    new List<Object>{
+                         new { value = "Low" , text = "Low"  },
+                         new { value = "Medium" , text = "Medium" },
+                         new { value = "High" , text = "High"}
+                      },
+                    "value",
+                    "text",
+                     2))
+
+                @Html.ValidationMessageFor(model => model.Importance, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Status, new SelectList(
+                    new List<Object>{
+                         new { value = "ToDo" , text = "ToDo"  },
+                         new { value = "Doing" , text = "Doing" },
+                         new { value = "Done" , text = "Done"}
+                      },
+                    "value",
+                    "text",
+                     2))
+
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="max-50 txt-right">
+                    <input type="submit" value="Save" class="btn btn-default signin-btn" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

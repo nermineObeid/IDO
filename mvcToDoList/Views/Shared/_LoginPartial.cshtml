@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm"}))
+    {
+    @Html.AntiForgeryToken()
+
+<div class="nav navbar-nav navbar-right">
+    <div class="dropdown">
+        <img src="~/images/Bitmap.png" class="profile"/>
+        <div class="dropdown-content row">
+            <div class="row flex-center">
+                <div class="col-sm-3"> <img src="~/images/Bitmap.png" class="profile" /></div>
+                <div class="col-sm-9 flex-column">
+                    <p class="profile-email">
+                        @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    </p>
+                    <a href="javascript:document.getElementById('logoutForm').submit()" class="profile-logout">Log Out <img src="~/images/Icon ionic-ios-log-out.svg" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

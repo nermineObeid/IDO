@@ -1,0 +1,145 @@
+﻿@model IEnumerable<mvcToDoList.Models.Todos>
+
+@{
+    ViewBag.Title = "ToDos";
+}
+
+
+<div class="row">
+    <div class="todo-section col-sm-4 parent" id="ToDo">
+        <div class="todo-row"> <img src="~/images/ToDoIcon.svg" /><h4>To Do</h4></div>
+
+        @foreach (var item in Model)
+        {
+            string statusToDo = "ToDo";
+            if (item.Status == statusToDo)
+            {
+                //<div class="task-section child" id="@item.ID" parameters="@item.Name|@item.Category|@item.Estimate|@item.DueDate|@item.Importance">
+                    <div class="tsk-section child" id="@item.ID">
+
+                        <div class="row">
+                            <div class="col-sm-10 pad-0"><p class="text title-val">@Html.DisplayFor(modelItem => item.Name)</p></div>
+                            <div class="col-sm-2 pad-0 txt-right">
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "edit-task" })
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "delete-task" })
+                            </div>
+                        </div>
+                        <div class="pad-3">
+                            <p class="gray"> @Html.DisplayNameFor(model => model.Category)</p>
+                            <p class="light cat-val">@Html.DisplayFor(modelItem => item.Category)</p>
+                        </div>
+
+                        <div class="pad-3">
+                            <p class="gray"> @Html.DisplayNameFor(model => model.DueDate)</p>
+                            <p class="light date-val">
+                                @Convert.ToDateTime(item.DueDate).ToString("dd/MM/yyyy")
+                            </p>
+                        </div>
+
+                        <div class="pad-3">
+                            <p class="gray"> @Html.DisplayNameFor(model => model.Estimate)</p>
+                            <p class="light est-val"> @Html.DisplayFor(modelItem => item.Estimate)</p>
+                        </div>
+                        <div class="pad-3">
+                            <p class="gray"> @Html.DisplayNameFor(model => model.Importance)</p>
+                            <p class="light @item.Importance imp-val"> @Html.DisplayFor(modelItem => item.Importance)</p>
+                        </div>
+
+
+                    </div>
+
+                    }
+                    }
+                </div>
+    <div class="todo-section col-sm-4 parent" id="Doing">
+        <div class="todo-row"> <img src="~/images/DoingIcon.svg" /><h4>Doing</h4></div>
+        @foreach (var item in Model)
+        {
+            string statusDoing = "Doing";
+            if (item.Status == statusDoing)
+            {
+                <div class="tsk-section child" id="@item.ID">
+
+                    <div class="row">
+                        <div class="col-sm-10 pad-0"><p class="text title-val">@Html.DisplayFor(modelItem => item.Name)</p></div>
+                        <div class="col-sm-2 pad-0 txt-right">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "edit-task" })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "delete-task" })
+                        </div>
+                    </div>
+                    <div class="pad-3">
+                        <p class="gray"> @Html.DisplayNameFor(model => model.Category)</p>
+                        <p class="light cat-val">@Html.DisplayFor(modelItem => item.Category)</p>
+                    </div>
+
+                    <div class="pad-3">
+                        <p class="gray"> @Html.DisplayNameFor(model => model.DueDate)</p>
+                        <p class="light date-val">
+                            @Convert.ToDateTime(item.DueDate).ToString("dd/MM/yyyy")
+                        </p>
+                    </div>
+
+                    <div class="pad-3">
+                        <p class="gray"> @Html.DisplayNameFor(model => model.Estimate)</p>
+                        <p class="light est-val"> @Html.DisplayFor(modelItem => item.Estimate)</p>
+                    </div>
+                    <div class="pad-3">
+                        <p class="gray"> @Html.DisplayNameFor(model => model.Importance)</p>
+                        <p class="light @item.Importance imp-val"> @Html.DisplayFor(modelItem => item.Importance)</p>
+                    </div>
+
+
+                </div>
+
+            }
+        }
+    </div>
+    <div class="todo-section col-sm-4 parent" id="Done">
+        <div class="todo-row"> <img src="~/images/DoneIcon.svg" /><h4>Done</h4></div>
+        @foreach (var item in Model)
+        {
+            string statusDone = "Done";
+            if (item.Status == statusDone)
+            {
+                <div class="tsk-section child" id="@item.ID">
+
+                    <div class="row">
+                        <div class="col-sm-10 pad-0"><p class="text title-val">@Html.DisplayFor(modelItem => item.Name)</p></div>
+                        <div class="col-sm-2 pad-0 txt-right">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "edit-task" })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "delete-task" })
+                        </div>
+                    </div>
+                    <div class="pad-3">
+                        <p class="gray"> @Html.DisplayNameFor(model => model.Category)</p>
+                        <p class="light cat-val">@Html.DisplayFor(modelItem => item.Category)</p>
+                    </div>
+
+                    <div class="pad-3">
+                        <p class="gray"> @Html.DisplayNameFor(model => model.DueDate)</p>
+                        <p class="light date-val">
+                            @Convert.ToDateTime(item.DueDate).ToString("MM/dd/yyyy")
+                        </p>
+                    </div>
+
+                    <div class="pad-3">
+                        <p class="gray"> @Html.DisplayNameFor(model => model.Estimate)</p>
+                        <p class="light est-val"> @Html.DisplayFor(modelItem => item.Estimate)</p>
+                    </div>
+                    <div class="pad-3">
+                        <p class="gray"> @Html.DisplayNameFor(model => model.Importance)</p>
+                        <p class="light @item.Importance imp-val"> @Html.DisplayFor(modelItem => item.Importance)</p>
+                    </div>
+
+
+                </div>
+
+            }
+        }
+    </div>
+
+
+</div>
+
+
+
